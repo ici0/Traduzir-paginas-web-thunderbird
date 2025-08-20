@@ -19,7 +19,6 @@ The extension requests the following permissions:
 - `menus` – reserved for future context menu integration.
 - `messagesRead` – access the displayed message contents.
 - `tabs` – communicate with the content script.
-- Host permissions to call Google or Microsoft translation APIs.
 
 ## Engine setup
 

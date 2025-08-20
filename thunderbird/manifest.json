@@ -8,9 +8,7 @@
     "storage",
     "menus",
     "messagesRead",
-    "tabs",
-    "*://translate.googleapis.com/*",
-    "*://api.cognitive.microsofttranslator.com/*"
+    "tabs"
   ],
   "background": { "scripts": ["background.js"] },
   "message_display_action": { "default_title": "Translate", "default_popup": "popup.html" },
