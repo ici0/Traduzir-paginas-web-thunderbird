@@ -16,17 +16,16 @@ async function init() {
     await browser.runtime.sendMessage({ type: 'SET_SETTINGS', settings: { target: targetSel.value } });
   });
 
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   let translated = false;
   try {
-    translated = await browser.tabs.sendMessage(tab.id, { type: 'STATUS' });
+    translated = await browser.runtime.sendMessage({ type: 'STATUS' });
   } catch (e) {
     translated = false;
   }
   updateButton(translated);
 
   actionBtn.addEventListener('click', async () => {
-    await browser.tabs.sendMessage(tab.id, { type: 'TOGGLE', engine: engineSel.value, to: targetSel.value });
+    await browser.runtime.sendMessage({ type: 'TOGGLE', engine: engineSel.value, to: targetSel.value });
     translated = !translated;
     updateButton(translated);
   });

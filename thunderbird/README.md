@@ -18,7 +18,6 @@ The extension requests the following permissions:
 - `storage` – save engine and target language settings.
 - `menus` – reserved for future context menu integration.
 - `messagesRead` – access the displayed message contents.
-- `tabs` – communicate with the content script.
 
 ## Engine setup
 

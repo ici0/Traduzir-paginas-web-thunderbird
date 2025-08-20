@@ -1,6 +1,7 @@
 let translated = false;
 let textNodes = [];
 let originalTexts = [];
+const port = browser.runtime.connect({ name: 'content' });
 
 function getTextNodes(root) {
   const nodes = [];
@@ -74,7 +75,7 @@ function restore() {
   translated = false;
 }
 
-browser.runtime.onMessage.addListener(async (msg) => {
+port.onMessage.addListener(async (msg) => {
   if (msg.type === 'TOGGLE') {
     if (translated) {
       restore();
@@ -86,7 +87,7 @@ browser.runtime.onMessage.addListener(async (msg) => {
         restore();
       }
     }
-  } else if (msg.type === 'STATUS') {
-    return translated;
+  } else if (msg.type === 'STATUS_REQUEST') {
+    port.postMessage({ type: 'STATUS_RESPONSE', translated });
   }
 });

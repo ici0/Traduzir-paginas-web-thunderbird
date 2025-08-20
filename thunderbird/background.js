@@ -3,12 +3,28 @@ const DEFAULTS = {
   target: 'es'
 };
 
+let contentPort = null;
+let pendingStatusResolve = null;
+
 async function getSettings() {
   const stored = await browser.storage.local.get(DEFAULTS);
   return Object.assign({}, DEFAULTS, stored);
 }
 
 browser.runtime.onMessage.addListener(async (msg) => {
+  if (msg.type === 'TOGGLE') {
+    contentPort?.postMessage({ type: 'TOGGLE', engine: msg.engine, to: msg.to });
+    return true;
+  }
+  if (msg.type === 'STATUS') {
+    if (!contentPort) {
+      return false;
+    }
+    return await new Promise(resolve => {
+      pendingStatusResolve = resolve;
+      contentPort.postMessage({ type: 'STATUS_REQUEST' });
+    });
+  }
   if (msg.type === 'GET_SETTINGS') {
     return await getSettings();
   }
@@ -18,6 +34,19 @@ browser.runtime.onMessage.addListener(async (msg) => {
   }
   if (msg.type === 'TRANSLATE_CHUNK') {
     return await translateTexts(msg.texts, msg.engine, msg.from || null, msg.to);
+  }
+});
+
+browser.runtime.onConnect.addListener(port => {
+  if (port.name === 'content') {
+    contentPort = port;
+    port.onDisconnect.addListener(() => { contentPort = null; });
+    port.onMessage.addListener(msg => {
+      if (msg.type === 'STATUS_RESPONSE' && pendingStatusResolve) {
+        pendingStatusResolve(msg.translated);
+        pendingStatusResolve = null;
+      }
+    });
   }
 });
 
