@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "TWP for Thunderbird – In-Place Email Translator",
+  "version": "0.1.0",
+  "description": "Translate entire email bodies in place using Google or Microsoft.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "twp-thunderbird@example.com",
+      "strict_min_version": "115.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "menus",
+    "tabs",
+    "messagesRead",
+    "messagesModify"
+  ],
+  "host_permissions": [
+    "*://translate.googleapis.com/*",
+    "*://translate.google.com/*",
+    "*://api.cognitive.microsofttranslator.com/*",
+    "*://www.bing.com/*"
+  ],
+  "background": {
+    "scripts": ["background/index.js"]
+  },
+  "message_display_action": {
+    "default_title": "Translate",
+    "default_popup": "ui/popup.html"
+  },
+  "message_display_scripts": [
+    {
+      "js": ["content/index.js"],
+      "css": ["content/styles.css"]
+    }
+  ],
+  "default_locale": "en"
+}
