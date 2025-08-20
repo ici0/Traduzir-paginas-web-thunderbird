@@ -2,12 +2,14 @@
   "manifest_version": 2,
   "name": "TWP for Thunderbird (MVP)",
   "version": "0.1.0",
-  "browser_specific_settings": { "gecko": { "id": "twp-tb-mvp@example.com", "strict_min_version": "115.0" } },
+  "applications": { "gecko": { "id": "twp-tb-mvp@example.com", "strict_min_version": "115.0" } },
   "description": "Translate the displayed email body in place using Google or Microsoft.",
   "permissions": [
     "storage",
     "menus",
-    "messagesRead"
+    "messagesRead",
+    "*://translate.googleapis.com/*",
+    "*://api.cognitive.microsofttranslator.com/*"
   ],
   "background": { "scripts": ["background.js"] },
   "message_display_action": { "default_title": "Translate", "default_popup": "popup.html" },

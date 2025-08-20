@@ -18,6 +18,7 @@ The extension requests the following permissions:
 - `storage` – save engine and target language settings.
 - `menus` – reserved for future context menu integration.
 - `messagesRead` – access the displayed message contents.
+- `*://translate.googleapis.com/*` and `*://api.cognitive.microsofttranslator.com/*` – call the translation services.
 
 ## Engine setup
 
