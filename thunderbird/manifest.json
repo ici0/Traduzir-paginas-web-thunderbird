@@ -14,9 +14,7 @@
     "menus",
     "tabs",
     "messagesRead",
-    "messagesModify"
-  ],
-  "host_permissions": [
+    "messagesModify",
     "*://translate.googleapis.com/*",
     "*://translate.google.com/*",
     "*://api.cognitive.microsofttranslator.com/*",
