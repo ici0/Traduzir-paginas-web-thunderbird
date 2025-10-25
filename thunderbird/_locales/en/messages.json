@@ -1,0 +1,6 @@
+{
+  "engine_label": { "message": "Engine" },
+  "language_label": { "message": "Target language" },
+  "translate_button": { "message": "Translate" },
+  "restore_button": { "message": "Show original" }
+}
